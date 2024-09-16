@@ -45,3 +45,24 @@ header {
   text-decoration: none;
   padding: 0.5rem;
 }
+
+.indiv-container {
+  display: flex;
+  justify-content: center;
+}
+
+.article-container {
+  display: flex;
+  flex-direction: column;
+  border: 0.1rem solid black;
+  flex: 1;
+  max-width: 75%;
+  min-width: 300px;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.votecomment {
+  display: flex;
+  justify-content: space-between;
+}
