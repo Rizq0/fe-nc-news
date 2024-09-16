@@ -29,10 +29,10 @@ export const Article = ({ articleid }) => {
   }
   return (
     <div className="article-container">
-      <h1>{getArticle?.title}</h1>
-      <img src={getArticle?.article_img_url} className="article-img" />
-      <h2>By {getArticle?.author}</h2>
-      <p>{getArticle?.body}</p>
+      <h1>{getArticle.title}</h1>
+      <img src={getArticle.article_img_url} className="article-img" />
+      <h2>By {getArticle.author}</h2>
+      <p>{getArticle.body}</p>
       <div className="votecomment">
         <p>Votes {getArticle.votes}</p>
         <p>Comment Count {getArticle.comment_count}</p>
