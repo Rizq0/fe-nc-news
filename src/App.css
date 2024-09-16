@@ -19,6 +19,14 @@ footer {
   margin: 1rem 0 0 0;
 }
 
+.loading {
+  height: 16rem;
+  width: 16rem;
+}
+.loadingdiv {
+  display: flex;
+  justify-content: center;
+}
 .homeicon {
   height: 3rem;
   width: 3rem;

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getAllArticles } from "../api-calls/api-calls";
 import { ArticleCard } from "./AllArticles-components/ArticleCard";
+import Lottie from "lottie-react";
+import cogLoading from "../assets/loading.json";
 
 function AllArticles() {
   const [articles, setArticles] = useState();
@@ -26,7 +28,11 @@ function AllArticles() {
   }, []);
 
   if (isLoading) {
-    return <h1>This page is loading!</h1>;
+    return (
+      <div className="loadingdiv">
+        <Lottie animationData={cogLoading} loop={true} className="loading" />
+      </div>
+    );
   }
 
   return (
