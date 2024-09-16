@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export const ArticleCard = ({ article }) => {
-  console.log(article);
   return (
     <Link to={`/articles/${article.article_id}`} className="article-link">
       <article className="article-item">
