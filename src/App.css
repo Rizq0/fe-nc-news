@@ -1,3 +1,7 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -28,14 +32,34 @@ footer {
   justify-content: center;
 }
 .homeicon {
-  height: 3rem;
-  width: 3rem;
+  height: 2rem;
+  width: 2rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.homeicon:hover {
+  filter: contrast(0);
+}
+
+.username {
+  padding: 0 1rem 0 1rem;
+  font-size: medium;
+}
+
+.headertitle {
+  flex-grow: 1;
+  padding: 0 1rem 0 1rem;
 }
 
 .page-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.article-img {
+  max-height: 300px;
+  object-fit: cover;
 }
 
 .articles-container {
@@ -56,7 +80,36 @@ footer {
   flex: 1;
   min-width: 300px;
   text-decoration: none;
+  color: black;
   padding: 0.5rem;
+}
+
+.article-link:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.article-link:hover {
+  box-shadow: 5px 5px rgb(207, 207, 207);
+  transition: 0.3s;
+  text-decoration: none;
+  color: black;
+}
+
+.article-link:focus {
+  text-decoration: none;
+  color: black;
+}
+
+.article-link:hover,
+.article-link:active {
+  text-decoration: none;
+  color: black;
+}
+
+.article-title {
+  margin: 0 0 1rem 0;
+  font-weight: 600;
 }
 
 .indiv-container {
@@ -69,7 +122,7 @@ footer {
   flex-direction: column;
   border: 0.1rem solid black;
   flex: 1;
-  max-width: 75%;
+  max-width: 65%;
   min-width: 300px;
   text-decoration: none;
   padding: 0.5rem;
@@ -78,4 +131,17 @@ footer {
 .votecomment {
   display: flex;
   justify-content: space-between;
+}
+
+.vertical-divider {
+  height: 80px;
+  border-left: 1px solid black;
+  margin: 10px 0 10px 0;
+}
+
+.authored-by {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
 }
