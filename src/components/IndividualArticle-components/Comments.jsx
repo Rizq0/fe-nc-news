@@ -56,14 +56,14 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
       <h1>Comments</h1>
       <div className="post-comment-container">
         <h2 className="post-comment">Post Comment</h2>
+        <h3 className="post-comment">as {user.username}</h3>
         <form className="post-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Please type your comment here..."
+          <textarea
             className="comment-input"
             onChange={handleComment}
+            placeholder="Please type your comment here..."
             required
-          />
+          ></textarea>
           <div className="submit-container">
             <input
               type="submit"
