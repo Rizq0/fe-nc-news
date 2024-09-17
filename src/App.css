@@ -115,6 +115,11 @@ footer {
   font-weight: 600;
 }
 
+.article-votes {
+  flex-grow: 1;
+  padding: 0 1rem 0 1rem;
+}
+
 .indiv-container {
   display: flex;
   flex-direction: column;
