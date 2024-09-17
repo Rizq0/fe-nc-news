@@ -7,6 +7,7 @@ export const Article = ({ articleid }) => {
   const [getArticle, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [votesCount, setVotesCount] = useState(0);
+  const [voteError, setVoteError] = useState(false);
 
   const handleVote = (e) => {
     const value = e.target.value;
@@ -21,10 +22,11 @@ export const Article = ({ articleid }) => {
     }
     patchLike(articleid, value)
       .then((res) => {
-        console.log(res);
+        setVoteError(false);
       })
       .catch((err) => {
         console.log(err);
+        setVoteError(true);
       });
   };
 
@@ -71,6 +73,11 @@ export const Article = ({ articleid }) => {
         <p className="article-votes">Votes {votesCount}</p>
         <p>Comment Count {getArticle.comment_count}</p>
       </div>
+      {voteError ? (
+        <p className="vote-error">
+          Error Registering Vote, Refresh Page & Please Try Again
+        </p>
+      ) : null}
     </div>
   );
 };

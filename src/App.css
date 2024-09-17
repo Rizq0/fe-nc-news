@@ -171,3 +171,9 @@ footer {
   justify-content: space-between;
   margin: 0;
 }
+
+.vote-error {
+  font-size: 0.9rem;
+  font-weight: 600;
+  align-self: center;
+}
