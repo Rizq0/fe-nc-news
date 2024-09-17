@@ -11,3 +11,7 @@ export const getAllArticles = (params) => {
 export const getArticleById = (id) => {
   return api.get(`/articles/${id}`);
 };
+
+export const getCommentsById = (id) => {
+  return api.get(`/articles/${id}/comments`);
+};
