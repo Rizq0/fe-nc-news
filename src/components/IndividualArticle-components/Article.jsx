@@ -8,14 +8,17 @@ export const Article = ({ articleid }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [votesCount, setVotesCount] = useState(0);
   const [voteError, setVoteError] = useState(false);
+  const [currentVote, setCurrentVote] = useState();
 
   const handleVote = (e) => {
     const value = e.target.value;
     if (value === "-1 Vote") {
+      setCurrentVote("-1");
       setVotesCount((currVote) => {
         return currVote - 1;
       });
     } else {
+      setCurrentVote("+1");
       setVotesCount((currVote) => {
         return currVote + 1;
       });
@@ -33,7 +36,6 @@ export const Article = ({ articleid }) => {
   useEffect(() => {
     getArticleById(articleid)
       .then(({ data: { article } }) => {
-        setIsLoading(false);
         setVotesCount(article.votes);
         setArticle(article);
       })
@@ -63,15 +65,17 @@ export const Article = ({ articleid }) => {
           type="button"
           value="+1 Vote"
           className="one-plus-vote"
+          disabled={currentVote === "+1"}
         />
         <input
           onClick={handleVote}
           type="button"
           value="-1 Vote"
           className="one-minus-vote"
+          disabled={currentVote === "-1"}
         />
-        <p className="article-votes">Votes {votesCount}</p>
-        <p>Comment Count {getArticle.comment_count}</p>
+        <p className="article-votes">Votes: {votesCount}</p>
+        <p>Comment Count: {getArticle.comment_count}</p>
       </div>
       {voteError ? (
         <p className="vote-error">

@@ -177,3 +177,7 @@ footer {
   font-weight: 600;
   align-self: center;
 }
+
+.bold-article-numbers {
+  font-weight: 800;
+}
