@@ -203,6 +203,8 @@ footer {
   margin: 1rem;
   min-width: 300px;
   max-width: 65%;
+  min-height: 15px;
+  max-height: 100px;
   width: 100%;
 }
 
