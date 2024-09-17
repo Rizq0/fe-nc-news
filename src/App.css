@@ -117,7 +117,7 @@ footer {
 
 .article-votes {
   flex-grow: 1;
-  padding: 0 1rem 0 1rem;
+  padding: 0 0.7rem 0 1rem;
 }
 
 .indiv-container {
@@ -157,6 +157,7 @@ footer {
 .votecomment {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .vertical-divider {
@@ -180,4 +181,16 @@ footer {
 
 .bold-article-numbers {
   font-weight: 800;
+}
+
+.one-plus-vote {
+  font-weight: 600;
+  width: 5rem;
+  height: 2rem;
+}
+
+.one-minus-vote {
+  font-weight: 600;
+  width: 5rem;
+  height: 2rem;
 }

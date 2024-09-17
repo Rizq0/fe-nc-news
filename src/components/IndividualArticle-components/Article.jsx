@@ -75,7 +75,9 @@ export const Article = ({ articleid }) => {
           disabled={currentVote === "-1"}
         />
         <p className="article-votes">Votes: {votesCount}</p>
-        <p>Comment Count: {getArticle.comment_count}</p>
+        <p className="article-commentcount">
+          Comment Count: {getArticle.comment_count}
+        </p>
       </div>
       {voteError ? (
         <p className="vote-error">
