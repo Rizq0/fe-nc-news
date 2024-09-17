@@ -39,6 +39,7 @@ footer {
 
 .homeicon:hover {
   filter: contrast(0);
+  transition: 0.3s;
 }
 
 .username {
