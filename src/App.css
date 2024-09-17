@@ -150,6 +150,10 @@ footer {
   margin: 0.5rem 0 0 0;
 }
 
+.no-comments {
+  align-self: center;
+  width: 100%;
+}
 .comment-item {
   border-bottom: 0.1rem solid black;
 }

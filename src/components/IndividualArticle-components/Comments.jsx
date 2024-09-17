@@ -30,6 +30,9 @@ export const Comments = ({ articleid }) => {
   return (
     <div className="comments-container">
       <h1>Comments</h1>
+      {commentsById.length === 0 ? (
+        <h2 className="no-comments">No Comments Available</h2>
+      ) : null}
       {commentsById.map((comment) => {
         return (
           <div key={comment.comment_id} className="comment-item">
