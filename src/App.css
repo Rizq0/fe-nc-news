@@ -201,6 +201,9 @@ footer {
 
 .comment-input {
   margin: 1rem;
+  min-width: 300px;
+  max-width: 65%;
+  width: 100%;
 }
 
 .comment-submit {
@@ -218,7 +221,9 @@ footer {
 .post-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 .post-comment {
   margin: 0.5rem 0 0.5rem 0;
@@ -226,4 +231,10 @@ footer {
 
 .comment-error-success {
   font-weight: 600;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

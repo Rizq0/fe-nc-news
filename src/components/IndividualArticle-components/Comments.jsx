@@ -64,11 +64,13 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
             onChange={handleComment}
             required
           />
-          <input
-            type="submit"
-            value="Submit Comment"
-            className="comment-submit"
-          />
+          <div className="submit-container">
+            <input
+              type="submit"
+              value="Submit Comment"
+              className="comment-submit"
+            />
+          </div>
         </form>
         {commentError ? (
           <p className="comment-error-success">
