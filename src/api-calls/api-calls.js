@@ -24,3 +24,11 @@ export const patchLike = (id, vote) => {
   let voteBody = { inc_votes: value };
   return api.patch(`/articles/${id}`, voteBody);
 };
+
+export const postComment = (id, user, value) => {
+  let commentBody = {
+    username: `${user}`,
+    body: `${value}`,
+  };
+  return api.post(`/articles/${id}/comments`, commentBody);
+};
