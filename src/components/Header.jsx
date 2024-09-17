@@ -10,8 +10,9 @@ export const Header = () => {
       <Link to="/">
         <img src="src/assets/home.png" alt="home button" className="homeicon" />
       </Link>
-      <h1>NC-NEWS</h1>
-      <h1>{userName}</h1>
+      <div className="vertical-divider"></div>
+      <h1 className="headertitle">NC-NEWS</h1>
+      <h1 className="username">{userName}</h1>
     </header>
   );
 };
