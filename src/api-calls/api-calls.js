@@ -17,7 +17,6 @@ export const getCommentsById = (id) => {
 };
 
 export const patchLike = (id, vote) => {
-  console.log(vote);
   let value = 1;
   if (vote === "-1 Vote") {
     value = -1;
