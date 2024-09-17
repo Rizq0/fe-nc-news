@@ -115,6 +115,11 @@ footer {
   font-weight: 600;
 }
 
+.article-votes {
+  flex-grow: 1;
+  padding: 0 0.7rem 0 1rem;
+}
+
 .indiv-container {
   display: flex;
   flex-direction: column;
@@ -152,6 +157,7 @@ footer {
 .votecomment {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .vertical-divider {
@@ -165,4 +171,26 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   margin: 0;
+}
+
+.vote-error {
+  font-size: 0.9rem;
+  font-weight: 600;
+  align-self: center;
+}
+
+.bold-article-numbers {
+  font-weight: 800;
+}
+
+.one-plus-vote {
+  font-weight: 600;
+  width: 5rem;
+  height: 2rem;
+}
+
+.one-minus-vote {
+  font-weight: 600;
+  width: 5rem;
+  height: 2rem;
 }

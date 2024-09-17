@@ -15,3 +15,12 @@ export const getArticleById = (id) => {
 export const getCommentsById = (id) => {
   return api.get(`/articles/${id}/comments`);
 };
+
+export const patchLike = (id, vote) => {
+  let value = 1;
+  if (vote === "-1 Vote") {
+    value = -1;
+  }
+  let voteBody = { inc_votes: value };
+  return api.patch(`/articles/${id}`, voteBody);
+};

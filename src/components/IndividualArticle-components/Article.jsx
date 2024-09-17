@@ -1,16 +1,42 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from "../../api-calls/api-calls";
+import { getArticleById, patchLike } from "../../api-calls/api-calls";
 import Lottie from "lottie-react";
 import cogLoading from "../../assets/loading.json";
 
 export const Article = ({ articleid }) => {
   const [getArticle, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [votesCount, setVotesCount] = useState(0);
+  const [voteError, setVoteError] = useState(false);
+  const [currentVote, setCurrentVote] = useState();
+
+  const handleVote = (e) => {
+    const value = e.target.value;
+    if (value === "-1 Vote") {
+      setCurrentVote("-1");
+      setVotesCount((currVote) => {
+        return currVote - 1;
+      });
+    } else {
+      setCurrentVote("+1");
+      setVotesCount((currVote) => {
+        return currVote + 1;
+      });
+    }
+    patchLike(articleid, value)
+      .then((res) => {
+        setVoteError(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setVoteError(true);
+      });
+  };
 
   useEffect(() => {
     getArticleById(articleid)
       .then(({ data: { article } }) => {
-        setIsLoading(false);
+        setVotesCount(article.votes);
         setArticle(article);
       })
       .catch((err) => {
@@ -34,9 +60,30 @@ export const Article = ({ articleid }) => {
       <h2>By {getArticle.author}</h2>
       <p>{getArticle.body}</p>
       <div className="votecomment">
-        <p>Votes {getArticle.votes}</p>
-        <p>Comment Count {getArticle.comment_count}</p>
+        <input
+          onClick={handleVote}
+          type="button"
+          value="+1 Vote"
+          className="one-plus-vote"
+          disabled={currentVote === "+1"}
+        />
+        <input
+          onClick={handleVote}
+          type="button"
+          value="-1 Vote"
+          className="one-minus-vote"
+          disabled={currentVote === "-1"}
+        />
+        <p className="article-votes">Votes: {votesCount}</p>
+        <p className="article-commentcount">
+          Comment Count: {getArticle.comment_count}
+        </p>
       </div>
+      {voteError ? (
+        <p className="vote-error">
+          Error Registering Vote, Refresh Page & Please Try Again
+        </p>
+      ) : null}
     </div>
   );
 };

@@ -10,7 +10,6 @@ export const Comments = ({ articleid }) => {
   useEffect(() => {
     getCommentsById(articleid)
       .then(({ data: { comments } }) => {
-        setIsLoading(false);
         setCommentsById(comments);
       })
       .catch((err) => {
