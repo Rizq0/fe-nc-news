@@ -32,3 +32,7 @@ export const postComment = (id, user, value) => {
   };
   return api.post(`/articles/${id}/comments`, commentBody);
 };
+
+export const deleteComment = (commentId) => {
+  return api.delete(`/comments/${commentId}`);
+};

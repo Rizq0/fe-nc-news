@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import homeIcon from "../assets/home.png";
 
 export const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -8,7 +9,7 @@ export const Header = () => {
   return (
     <header>
       <Link to="/">
-        <img src="src/assets/home.png" alt="home button" className="homeicon" />
+        <img src={homeIcon} alt="home button" className="homeicon" />
       </Link>
       <div className="vertical-divider"></div>
       <h1 className="headertitle">NC-NEWS</h1>
