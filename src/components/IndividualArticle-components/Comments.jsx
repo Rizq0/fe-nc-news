@@ -8,6 +8,7 @@ import { UserContext } from "../../contexts/UserContext";
 export const Comments = ({ articleid, commentCount, setCommentCount }) => {
   const [commentsById, setCommentsById] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [commentIsLoading, setCommentIsLoading] = useState(false);
   const [commentError, setCommentError] = useState(false);
   const [commentSuccess, setCommentSuccess] = useState(false);
   const [commentBody, setPostComment] = useState("");
@@ -20,13 +21,16 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCommentIsLoading(true);
     postComment(articleid, user.username, commentBody)
       .then(({ data: { comment } }) => {
+        setCommentIsLoading(false);
         setCommentSuccess(true);
         setCommentCount((currCount) => Number(currCount) + 1);
         commentsById.push(comment);
       })
       .catch((err) => {
+        setCommentIsLoading(false);
         setCommentError(true);
       });
   };
@@ -72,16 +76,19 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
             />
           </div>
         </form>
-        {commentError ? (
+        {commentIsLoading && (
+          <Lottie animationData={cogLoading} loop={true} className="loading" />
+        )}
+        {commentError && (
           <p className="comment-error-success">
             There has been an error posting your comment.
           </p>
-        ) : null}
-        {commentSuccess ? (
+        )}
+        {commentSuccess && (
           <p className="comment-error-success">
             Your comment has successfully been posted.
           </p>
-        ) : null}
+        )}
       </div>
       {commentsById.length === 0 ? (
         <h2 className="no-comments">No Comments Available</h2>
