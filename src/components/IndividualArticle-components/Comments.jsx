@@ -116,14 +116,9 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
           </p>
         )}
         {commentSuccess && (
-          <>
-            <p className="comment-error-success">
-              Your comment has successfully been posted.
-            </p>
-            <p className="comment-error-success">
-              To delete this comment, please refresh this page and click delete.
-            </p>
-          </>
+          <p className="comment-error-success">
+            Your comment has successfully been posted.
+          </p>
         )}
       </div>
       {commentsById.length === 0 ? (
