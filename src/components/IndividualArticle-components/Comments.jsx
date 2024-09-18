@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import cogLoading from "../../assets/loading.json";
-import { getCommentsById, postComment } from "../../api-calls/api-calls";
+import {
+  deleteComment,
+  getCommentsById,
+  postComment,
+} from "../../api-calls/api-calls";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import bin from "../../assets/bin.png";
@@ -13,6 +17,8 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
   const [commentError, setCommentError] = useState(false);
   const [commentSuccess, setCommentSuccess] = useState(false);
   const [commentBody, setPostComment] = useState("");
+  const [commentIdToDelete, setCommentIdToDelete] = useState();
+  const [commentDeleteError, setCommentDeleteError] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
   const handleComment = (e) => {
@@ -28,12 +34,36 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
         setCommentIsLoading(false);
         setCommentSuccess(true);
         setCommentCount((currCount) => Number(currCount) + 1);
-        commentsById.push(comment);
+        setCommentsById([...commentsById, comment]);
       })
       .catch((err) => {
         setCommentIsLoading(false);
         setCommentError(true);
       });
+  };
+
+  const handleDelete = (e) => {
+    const commentId = e.target.value;
+    const outcome = confirm(
+      "Are you sure you want to delete this comment? This cannot be undone."
+    );
+    if (outcome) {
+      setCommentIdToDelete(commentId);
+      deleteComment(commentId)
+        .then(() => {
+          setCommentIdToDelete();
+          setCommentCount((currCount) => Number(currCount) - 1);
+          const filteredComments = commentsById.filter((comment) => {
+            return comment.comment_id !== Number(commentId);
+          });
+          setCommentsById(filteredComments);
+        })
+        .catch((err) => {
+          setCommentIdToDelete();
+          setCommentDeleteError(true);
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -86,9 +116,14 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
           </p>
         )}
         {commentSuccess && (
-          <p className="comment-error-success">
-            Your comment has successfully been posted.
-          </p>
+          <>
+            <p className="comment-error-success">
+              Your comment has successfully been posted.
+            </p>
+            <p className="comment-error-success">
+              To delete this comment, please refresh this page and click delete.
+            </p>
+          </>
         )}
       </div>
       {commentsById.length === 0 ? (
@@ -102,12 +137,28 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
             <div className="votes-delete">
               <p>Votes: {comment.votes}</p>
               {user.username === comment.author && (
-                <input
-                  type="image"
-                  src={bin}
-                  className="delete-comment-icon"
-                  alt="delete comment"
-                />
+                <>
+                  {Number(commentIdToDelete) === comment.comment_id && (
+                    <Lottie
+                      animationData={cogLoading}
+                      loop={true}
+                      className="delete-loading"
+                    />
+                  )}
+                  {commentDeleteError && (
+                    <p className="comment-delete-error">
+                      Error deleting comment. Refresh this page and try again.
+                    </p>
+                  )}
+                  <input
+                    onClick={handleDelete}
+                    type="image"
+                    src={bin}
+                    value={comment.comment_id}
+                    className="delete-comment-icon"
+                    alt="delete comment"
+                  />
+                </>
               )}
             </div>
           </div>
