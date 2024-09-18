@@ -3,7 +3,7 @@ import { getArticleById, patchLike } from "../../api-calls/api-calls";
 import Lottie from "lottie-react";
 import cogLoading from "../../assets/loading.json";
 
-export const Article = ({ articleid, commentCount, setCommentCount }) => {
+export const Article = ({ articleid }) => {
   const [getArticle, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [votesCount, setVotesCount] = useState(0);
@@ -37,7 +37,6 @@ export const Article = ({ articleid, commentCount, setCommentCount }) => {
     getArticleById(articleid)
       .then(({ data: { article } }) => {
         setVotesCount(article.votes);
-        setCommentCount(article.comment_count);
         setArticle(article);
       })
       .catch((err) => {
@@ -76,7 +75,9 @@ export const Article = ({ articleid, commentCount, setCommentCount }) => {
           disabled={currentVote === "-1"}
         />
         <p className="article-votes">Votes: {votesCount}</p>
-        <p className="article-commentcount">Comment Count: {commentCount}</p>
+        <p className="article-commentcount">
+          Comment Count: {getArticle.comment_count}
+        </p>
       </div>
       {voteError ? (
         <p className="vote-error">

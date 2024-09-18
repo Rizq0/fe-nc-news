@@ -155,7 +155,15 @@ footer {
   align-self: center;
 }
 .comment-item {
+  display: flex;
+  flex-direction: column;
   border-bottom: 0.1rem solid black;
+}
+
+.votes-delete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .votecomment {
@@ -239,4 +247,10 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.delete-comment-icon {
+  height: 2rem;
+  width: 2rem;
+  padding: 0 1rem 0 1rem;
 }

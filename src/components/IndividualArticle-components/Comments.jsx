@@ -4,6 +4,7 @@ import cogLoading from "../../assets/loading.json";
 import { getCommentsById, postComment } from "../../api-calls/api-calls";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import bin from "../../assets/bin.png";
 
 export const Comments = ({ articleid, commentCount, setCommentCount }) => {
   const [commentsById, setCommentsById] = useState();
@@ -98,7 +99,17 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
           <div key={comment.comment_id} className="comment-item">
             <p>{comment.body}</p>
             <p>Authored By: {comment.author}</p>
-            <p>Votes: {comment.votes}</p>
+            <div className="votes-delete">
+              <p>Votes: {comment.votes}</p>
+              {user.username === comment.author && (
+                <input
+                  type="image"
+                  src={bin}
+                  className="delete-comment-icon"
+                  alt="delete comment"
+                />
+              )}
+            </div>
           </div>
         );
       })}
