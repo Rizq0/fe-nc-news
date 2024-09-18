@@ -130,7 +130,7 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
             <p>{comment.body}</p>
             <p>Authored By: {comment.author}</p>
             <div className="votes-delete">
-              <p>Votes: {comment.votes}</p>
+              <p className="votes-text-comment">Votes: {comment.votes}</p>
               {user.username === comment.author && (
                 <>
                   {Number(commentIdToDelete) === comment.comment_id && (

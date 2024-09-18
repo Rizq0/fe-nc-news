@@ -256,7 +256,11 @@ footer {
 .delete-comment-icon {
   height: 2rem;
   width: 2rem;
-  padding: 0 1rem 0 1rem;
+  padding: 0 0 0 1rem;
+}
+
+.votes-text-comment {
+  padding: 0 1rem 0 0;
 }
 
 .delete-loading {
