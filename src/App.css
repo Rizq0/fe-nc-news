@@ -39,6 +39,7 @@ footer {
 
 .homeicon:hover {
   filter: contrast(0);
+  transition: 0.3s;
 }
 
 .username {
@@ -150,6 +151,9 @@ footer {
   margin: 0.5rem 0 0 0;
 }
 
+.no-comments {
+  align-self: center;
+}
 .comment-item {
   border-bottom: 0.1rem solid black;
 }
@@ -193,4 +197,46 @@ footer {
   font-weight: 600;
   width: 5rem;
   height: 2rem;
+}
+
+.comment-input {
+  margin: 1rem;
+  min-width: 300px;
+  max-width: 65%;
+  min-height: 15px;
+  max-height: 100px;
+  width: 1180px;
+}
+
+.comment-submit {
+  margin: 1rem;
+}
+
+.post-comment-container {
+  display: flex;
+  border-bottom: 1px solid black;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.post-comment {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.comment-error-success {
+  font-weight: 600;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
