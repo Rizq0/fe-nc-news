@@ -22,7 +22,6 @@ export const Toolbar = ({
   const navigate = useNavigate();
   const handleTopics = (e) => {
     const value = e.target.value;
-    setSelectedTopic(value);
     if (value === "all") {
       navigate("/");
     } else {
@@ -32,20 +31,12 @@ export const Toolbar = ({
 
   const handleSortBy = (e) => {
     const value = e.target.value;
-    if (selectedTopic === "all") {
-      setSortByAll(value);
-    } else {
-      setSortByTopic(value);
-    }
+    setSortByAll(value);
   };
 
   const handleOrder = (e) => {
     const value = e.target.value;
-    if (selectedTopic === "all") {
-      setOrderAll(value);
-    } else {
-      setOrderTopic(value);
-    }
+    setOrderAll(value);
   };
 
   useEffect(() => {
@@ -71,7 +62,7 @@ export const Toolbar = ({
             name="queries"
             onChange={handleSortBy}
             className="topic-select"
-            value={selectedTopic === "all" ? sortByAll : sortByTopic}
+            value={sortByAll}
           >
             <option value="created_at">date</option>
             <option value="comment_count">comment count</option>
@@ -84,7 +75,7 @@ export const Toolbar = ({
             name="order"
             onChange={handleOrder}
             className="topic-select"
-            value={selectedTopic === "all" ? orderAll : orderTopic}
+            value={orderAll}
           >
             <option value="DESC">descending</option>
             <option value="ASC">ascending</option>

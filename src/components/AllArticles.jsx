@@ -4,13 +4,24 @@ import { ArticleCard } from "./AllArticles-components/ArticleCard";
 import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { Toolbar } from "./Toolbar";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function AllArticles({ selectedTopic, setSelectedTopic }) {
-  const [articles, setArticles] = useState();
+function AllArticles() {
+  const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortByAll] = useState("created_at");
   const [order, setOrderAll] = useState("DESC");
+  const [selectedTopic, setSelectedTopic] = useState("");
+
+  const { topic } = useParams();
+
+  useEffect(() => {
+    if (!topic) {
+      setSelectedTopic("all");
+    } else {
+      setSelectedTopic(topic);
+    }
+  }, [topic]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,7 +41,7 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sortBy, order]);
+  }, [sortBy, order, topic]);
 
   if (isLoading) {
     return (
@@ -51,9 +62,15 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
         orderAll={order}
       />
       <div className="articles-container">
-        {articles.map((article) => (
-          <ArticleCard article={article} key={article.title} />
-        ))}
+        {selectedTopic === "all"
+          ? articles.map((article) => (
+              <ArticleCard article={article} key={article.title} />
+            ))
+          : articles.map((article) => {
+              return topic === article.topic ? (
+                <ArticleCard article={article} key={article.title} />
+              ) : null;
+            })}
       </div>
     </section>
   );
