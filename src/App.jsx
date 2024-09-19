@@ -5,6 +5,7 @@ import { IndividualArticle } from "./components/IndividualArticle";
 import AllArticles from "./components/AllArticles";
 import Footer from "./components/Footer";
 import "./App.css";
+import { TopicArticles } from "./components/TopicArticles";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<AllArticles />} />
         <Route path="/articles/:articleid" element={<IndividualArticle />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/articles/topics/:topic" element={<TopicArticles />} />
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
       <Footer />
     </div>

@@ -32,9 +32,11 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
     postComment(articleid, user.username, commentBody)
       .then(({ data: { comment } }) => {
         setCommentIsLoading(false);
+        setCommentError(false);
         setCommentSuccess(true);
         setCommentCount((currCount) => Number(currCount) + 1);
-        setCommentsById([...commentsById, comment]);
+        setCommentsById([comment, ...commentsById]);
+        e.target.reset();
       })
       .catch((err) => {
         setCommentIsLoading(false);
@@ -104,6 +106,7 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
               type="submit"
               value="Submit Comment"
               className="comment-submit"
+              disabled={commentIsLoading}
             />
           </div>
         </form>

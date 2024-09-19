@@ -36,3 +36,8 @@ export const postComment = (id, user, value) => {
 export const deleteComment = (commentId) => {
   return api.delete(`/comments/${commentId}`);
 };
+
+export const getAllTopics = () => {
+  console.log("HERE");
+  return api.get(`/topics`);
+};
