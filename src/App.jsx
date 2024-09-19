@@ -8,13 +8,31 @@ import "./App.css";
 import { TopicArticles } from "./components/TopicArticles";
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState("all");
+
   return (
     <div className="layout">
       <Header />
       <Routes>
-        <Route path="/" element={<AllArticles />} />
+        <Route
+          path="/"
+          element={
+            <AllArticles
+              selectedTopic={selectedTopic}
+              setSelectedTopic={setSelectedTopic}
+            />
+          }
+        />
         <Route path="/articles/:articleid" element={<IndividualArticle />} />
-        <Route path="/articles/topics/:topic" element={<TopicArticles />} />
+        <Route
+          path="/articles/topics/:topic"
+          element={
+            <TopicArticles
+              selectedTopic={selectedTopic}
+              setSelectedTopic={setSelectedTopic}
+            />
+          }
+        />
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
       <Footer />

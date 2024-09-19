@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { useParams } from "react-router-dom";
 
-export const TopicArticles = () => {
+export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,7 +41,10 @@ export const TopicArticles = () => {
 
   return (
     <section className="page-content">
-      <Toolbar />
+      <Toolbar
+        selectedTopic={selectedTopic}
+        setSelectedTopic={setSelectedTopic}
+      />
       <div className="articles-container">
         {articles.map((article) => {
           return topic === article.topic ? (

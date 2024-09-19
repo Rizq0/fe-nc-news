@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { Toolbar } from "./Toolbar";
 
-function AllArticles() {
+function AllArticles({ selectedTopic, setSelectedTopic }) {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,7 +38,10 @@ function AllArticles() {
 
   return (
     <section className="page-content">
-      <Toolbar />
+      <Toolbar
+        selectedTopic={selectedTopic}
+        setSelectedTopic={setSelectedTopic}
+      />
       <div className="articles-container">
         {articles.map((article) => (
           <ArticleCard article={article} key={article.title} />

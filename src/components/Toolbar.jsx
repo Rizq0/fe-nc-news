@@ -4,10 +4,9 @@ import cogLoading from "../assets/loading.json";
 import { useNavigate } from "react-router-dom";
 import { getAllTopics } from "../api-calls/api-calls";
 
-export const Toolbar = () => {
+export const Toolbar = ({ selectedTopic, setSelectedTopic }) => {
   const [topics, setTopics] = useState();
   const [topicsLoading, setTopicsLoading] = useState(true);
-  const [selectedTopic, setSelectedTopic] = useState("all");
 
   const navigate = useNavigate();
   const handleTopics = (e) => {
@@ -19,6 +18,8 @@ export const Toolbar = () => {
       navigate(`/articles/topics/${value}`);
     }
   };
+
+  const handleQueries = (e) => {};
 
   useEffect(() => {
     getAllTopics()
@@ -36,7 +37,31 @@ export const Toolbar = () => {
 
   return (
     <div className="toolbar-container">
-      <h1>SORT BY</h1>
+      <div className="query-container">
+        <div className="query-select-container">
+          <p className="topic-label">Sort By</p>
+          <select
+            name="queries"
+            onChange={handleQueries}
+            className="topic-select"
+          >
+            <option value="created_at">date</option>
+            <option value="comment_count">comment count</option>
+            <option value="votes">vote count</option>
+          </select>
+        </div>
+        <div className="query-select-container">
+          <p className="topic-label">Order</p>
+          <select
+            name="queries"
+            onChange={handleQueries}
+            className="topic-select"
+          >
+            <option value="ASC">ascending</option>
+            <option value="DESC">descending</option>
+          </select>
+        </div>
+      </div>
       {topicsLoading ? (
         <Lottie
           animationData={cogLoading}
