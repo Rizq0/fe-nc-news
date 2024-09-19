@@ -1,17 +1,20 @@
+import { Toolbar } from "./Toolbar";
+import { ArticleCard } from "./AllArticles-components/ArticleCard";
 import { useState, useEffect } from "react";
 import { getAllArticles } from "../api-calls/api-calls";
-import { ArticleCard } from "./AllArticles-components/ArticleCard";
 import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
-import { Toolbar } from "./Toolbar";
+import { useParams } from "react-router-dom";
 
-function AllArticles() {
+export const TopicArticles = () => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
+  const { topic } = useParams();
+
   useEffect(() => {
     const params = {
-      //   sort_by: "title",
+      //   sort_by: topic,
       //   order: "ASC",
     };
     getAllArticles({ params })
@@ -40,12 +43,12 @@ function AllArticles() {
     <section className="page-content">
       <Toolbar />
       <div className="articles-container">
-        {articles.map((article) => (
-          <ArticleCard article={article} key={article.title} />
-        ))}
+        {articles.map((article) => {
+          return topic === article.topic ? (
+            <ArticleCard article={article} key={article.title} />
+          ) : null;
+        })}
       </div>
     </section>
   );
-}
-
-export default AllArticles;
+};

@@ -114,6 +114,7 @@ footer {
 .article-title {
   margin: 0 0 1rem 0;
   font-weight: 600;
+  min-height: 3rem;
 }
 
 .article-votes {
@@ -272,4 +273,40 @@ footer {
 .delete-comment-icon:hover {
   filter: contrast(0);
   transition: 0.3s;
+}
+
+.toolbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 0.1rem solid black;
+  flex: 1;
+  align-items: center;
+  max-width: 65%;
+  min-width: 300px;
+  margin: 0 0 1rem 0;
+  width: 1180px;
+  padding: 0.5rem;
+}
+
+.toolbar-loading {
+  height: 3rem;
+  width: 3rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.topic-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topic-label {
+  font-size: small;
+  font-weight: 600;
+  margin: 0.2rem 0;
+}
+
+.votes-comments-articlecard {
+  display: flex;
 }

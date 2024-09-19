@@ -15,6 +15,10 @@ export const ArticleCard = ({ article }) => {
           <p>Topic:</p>
           <p>{article.topic}</p>
         </div>
+        <div className="authored-by">
+          <p>Votes: {article.votes}</p>
+          <p>Comments: {article.comment_count}</p>
+        </div>
       </article>
     </Link>
   );
