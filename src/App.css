@@ -321,3 +321,12 @@ footer {
   flex-direction: column;
   align-items: center;
 }
+
+.error {
+  height: 65%;
+  width: 65%;
+}
+
+.error-text {
+  text-align: center;
+}

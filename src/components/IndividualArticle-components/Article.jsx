@@ -3,7 +3,13 @@ import { getArticleById, patchLike } from "../../api-calls/api-calls";
 import Lottie from "lottie-react";
 import cogLoading from "../../assets/loading.json";
 
-export const Article = ({ articleid, commentCount, setCommentCount }) => {
+export const Article = ({
+  articleid,
+  commentCount,
+  setCommentCount,
+  setIsIdError,
+  setErrorMsg,
+}) => {
   const [getArticle, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [votesCount, setVotesCount] = useState(0);
@@ -42,7 +48,8 @@ export const Article = ({ articleid, commentCount, setCommentCount }) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        setIsIdError(true);
+        setErrorMsg(err);
       })
       .finally(() => {
         setIsLoading(false);
