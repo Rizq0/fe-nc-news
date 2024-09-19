@@ -4,7 +4,14 @@ import cogLoading from "../assets/loading.json";
 import { useNavigate } from "react-router-dom";
 import { getAllTopics } from "../api-calls/api-calls";
 
-export const Toolbar = ({ selectedTopic, setSelectedTopic }) => {
+export const Toolbar = ({
+  selectedTopic,
+  setSelectedTopic,
+  setSortByAll,
+  setOrderAll,
+  setSortByTopic,
+  setOrderTopic,
+}) => {
   const [topics, setTopics] = useState();
   const [topicsLoading, setTopicsLoading] = useState(true);
 
@@ -19,7 +26,23 @@ export const Toolbar = ({ selectedTopic, setSelectedTopic }) => {
     }
   };
 
-  const handleQueries = (e) => {};
+  const handleSortBy = (e) => {
+    const value = e.target.value;
+    if (selectedTopic === "all") {
+      setSortByAll(value);
+    } else {
+      setSortByTopic(value);
+    }
+  };
+
+  const handleOrder = (e) => {
+    const value = e.target.value;
+    if (selectedTopic === "all") {
+      setOrderAll(value);
+    } else {
+      setOrderTopic(value);
+    }
+  };
 
   useEffect(() => {
     getAllTopics()
@@ -42,7 +65,7 @@ export const Toolbar = ({ selectedTopic, setSelectedTopic }) => {
           <p className="topic-label">Sort By</p>
           <select
             name="queries"
-            onChange={handleQueries}
+            onChange={handleSortBy}
             className="topic-select"
           >
             <option value="created_at">date</option>
@@ -52,13 +75,9 @@ export const Toolbar = ({ selectedTopic, setSelectedTopic }) => {
         </div>
         <div className="query-select-container">
           <p className="topic-label">Order</p>
-          <select
-            name="queries"
-            onChange={handleQueries}
-            className="topic-select"
-          >
-            <option value="ASC">ascending</option>
+          <select name="order" onChange={handleOrder} className="topic-select">
             <option value="DESC">descending</option>
+            <option value="ASC">ascending</option>
           </select>
         </div>
       </div>

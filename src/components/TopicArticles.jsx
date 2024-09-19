@@ -9,13 +9,15 @@ import { useParams } from "react-router-dom";
 export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortByTopic] = useState("created_at");
+  const [order, setOrderTopic] = useState("DESC");
 
   const { topic } = useParams();
 
   useEffect(() => {
     const params = {
-      //   sort_by: topic,
-      //   order: "ASC",
+      sort_by: sortBy,
+      order: order,
     };
     getAllArticles({ params })
       .then(({ data }) => {
@@ -29,7 +31,7 @@ export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [sortBy, order]);
 
   if (isLoading) {
     return (
@@ -44,6 +46,8 @@ export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
       <Toolbar
         selectedTopic={selectedTopic}
         setSelectedTopic={setSelectedTopic}
+        setSortByTopic={setSortByTopic}
+        setOrderTopic={setOrderTopic}
       />
       <div className="articles-container">
         {articles.map((article) => {

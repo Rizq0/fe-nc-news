@@ -4,15 +4,18 @@ import { ArticleCard } from "./AllArticles-components/ArticleCard";
 import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { Toolbar } from "./Toolbar";
+import { useSearchParams } from "react-router-dom";
 
 function AllArticles({ selectedTopic, setSelectedTopic }) {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortByAll] = useState("created_at");
+  const [order, setOrderAll] = useState("DESC");
 
   useEffect(() => {
     const params = {
-      //   sort_by: "title",
-      //   order: "ASC",
+      sort_by: sortBy,
+      order: order,
     };
     getAllArticles({ params })
       .then(({ data }) => {
@@ -26,7 +29,7 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [sortBy, order]);
 
   if (isLoading) {
     return (
@@ -41,6 +44,8 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
       <Toolbar
         selectedTopic={selectedTopic}
         setSelectedTopic={setSelectedTopic}
+        setSortByAll={setSortByAll}
+        setOrderAll={setOrderAll}
       />
       <div className="articles-container">
         {articles.map((article) => (
