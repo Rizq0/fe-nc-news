@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { Toolbar } from "./Toolbar";
 import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function AllArticles() {
   const [articles, setArticles] = useState([]);
@@ -12,9 +13,9 @@ function AllArticles() {
   const [sortBy, setSortByAll] = useState("created_at");
   const [order, setOrderAll] = useState("DESC");
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { topic } = useParams();
-
   useEffect(() => {
     if (!topic) {
       setSelectedTopic("all");
@@ -25,9 +26,13 @@ function AllArticles() {
 
   useEffect(() => {
     setIsLoading(true);
+    const sortByQuery = searchParams.get("sort_by");
+    setSortByAll(sortByQuery);
+    const orderQuery = searchParams.get("order");
+    setOrderAll(orderQuery);
     const params = {
-      sort_by: sortBy,
-      order: order,
+      sort_by: sortByQuery,
+      order: orderQuery,
     };
     getAllArticles({ params })
       .then(({ data }) => {
@@ -41,7 +46,7 @@ function AllArticles() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sortBy, order, topic]);
+  }, [searchParams, topic]);
 
   if (isLoading) {
     return (
@@ -55,9 +60,6 @@ function AllArticles() {
     <section className="page-content">
       <Toolbar
         selectedTopic={selectedTopic}
-        setSelectedTopic={setSelectedTopic}
-        setSortByAll={setSortByAll}
-        setOrderAll={setOrderAll}
         sortByAll={sortBy}
         orderAll={order}
       />

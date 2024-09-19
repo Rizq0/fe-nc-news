@@ -3,40 +3,48 @@ import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { useNavigate } from "react-router-dom";
 import { getAllTopics } from "../api-calls/api-calls";
+import { useSearchParams, createSearchParams } from "react-router-dom";
 
-export const Toolbar = ({
-  selectedTopic,
-  setSelectedTopic,
-  setSortByAll,
-  setOrderAll,
-  setSortByTopic,
-  setOrderTopic,
-  sortByAll,
-  orderAll,
-  sortByTopic,
-  orderTopic,
-}) => {
+export const Toolbar = ({ selectedTopic, sortByAll, orderAll }) => {
   const [topics, setTopics] = useState();
   const [topicsLoading, setTopicsLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
   const handleTopics = (e) => {
     const value = e.target.value;
     if (value === "all") {
-      navigate("/");
+      navigate({
+        pathname: "/",
+        search: searchParams.toString(),
+      });
     } else {
-      navigate(`/articles/topics/${value}`);
+      navigate({
+        pathname: `/articles/topics/${value}`,
+        search: searchParams.toString(),
+      });
     }
   };
 
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", sortByAll);
+    newParams.set("order", orderAll);
+    setSearchParams(newParams);
+  }, []);
+
   const handleSortBy = (e) => {
     const value = e.target.value;
-    setSortByAll(value);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", value);
+    setSearchParams(newParams);
   };
 
   const handleOrder = (e) => {
     const value = e.target.value;
-    setOrderAll(value);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("order", value);
+    setSearchParams(newParams);
   };
 
   useEffect(() => {

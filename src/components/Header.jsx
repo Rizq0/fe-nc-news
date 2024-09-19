@@ -8,7 +8,7 @@ export const Header = () => {
   const userName = user.username;
   return (
     <header>
-      <Link to="/">
+      <Link to="/?sort_by=created_at&order=DESC">
         <img src={homeIcon} alt="home button" className="homeicon" />
       </Link>
       <div className="vertical-divider"></div>
