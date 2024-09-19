@@ -27,12 +27,16 @@ function AllArticles() {
   useEffect(() => {
     setIsLoading(true);
     const sortByQuery = searchParams.get("sort_by");
-    setSortByAll(sortByQuery);
+    if (sortByQuery) {
+      setSortByAll(sortByQuery);
+    }
     const orderQuery = searchParams.get("order");
-    setOrderAll(orderQuery);
+    if (orderQuery) {
+      setOrderAll(orderQuery);
+    }
     const params = {
-      sort_by: sortByQuery,
-      order: orderQuery,
+      sort_by: sortByQuery ?? sortBy,
+      order: orderQuery ?? order,
     };
     getAllArticles({ params })
       .then(({ data }) => {
