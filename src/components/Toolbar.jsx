@@ -3,21 +3,48 @@ import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
 import { useNavigate } from "react-router-dom";
 import { getAllTopics } from "../api-calls/api-calls";
+import { useSearchParams, createSearchParams } from "react-router-dom";
 
-export const Toolbar = () => {
+export const Toolbar = ({ selectedTopic, sortByAll, orderAll }) => {
   const [topics, setTopics] = useState();
   const [topicsLoading, setTopicsLoading] = useState(true);
-  const [selectedTopic, setSelectedTopic] = useState("all");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
   const handleTopics = (e) => {
     const value = e.target.value;
-    setSelectedTopic(value);
     if (value === "all") {
-      navigate("/");
+      navigate({
+        pathname: "/",
+        search: searchParams.toString(),
+      });
     } else {
-      navigate(`/articles/topics/${value}`);
+      navigate({
+        pathname: `/articles/topics/${value}`,
+        search: searchParams.toString(),
+      });
     }
+  };
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", sortByAll);
+    newParams.set("order", orderAll);
+    setSearchParams(newParams);
+  }, []);
+
+  const handleSortBy = (e) => {
+    const value = e.target.value;
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", value);
+    setSearchParams(newParams);
+  };
+
+  const handleOrder = (e) => {
+    const value = e.target.value;
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("order", value);
+    setSearchParams(newParams);
   };
 
   useEffect(() => {
@@ -36,7 +63,33 @@ export const Toolbar = () => {
 
   return (
     <div className="toolbar-container">
-      <h1>SORT BY</h1>
+      <div className="query-container">
+        <div className="query-select-container">
+          <p className="topic-label">Sort By</p>
+          <select
+            name="queries"
+            onChange={handleSortBy}
+            className="topic-select"
+            value={sortByAll}
+          >
+            <option value="created_at">date</option>
+            <option value="comment_count">comment count</option>
+            <option value="votes">vote count</option>
+          </select>
+        </div>
+        <div className="query-select-container">
+          <p className="topic-label">Order</p>
+          <select
+            name="order"
+            onChange={handleOrder}
+            className="topic-select"
+            value={orderAll}
+          >
+            <option value="DESC">descending</option>
+            <option value="ASC">ascending</option>
+          </select>
+        </div>
+      </div>
       {topicsLoading ? (
         <Lottie
           animationData={cogLoading}

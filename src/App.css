@@ -310,3 +310,14 @@ footer {
 .votes-comments-articlecard {
   display: flex;
 }
+
+.query-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.query-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
