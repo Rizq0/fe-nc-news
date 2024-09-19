@@ -32,7 +32,7 @@ export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sortBy, order]);
+  }, [sortBy, order, selectedTopic]);
 
   if (isLoading) {
     return (
