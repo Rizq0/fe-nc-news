@@ -38,6 +38,5 @@ export const deleteComment = (commentId) => {
 };
 
 export const getAllTopics = () => {
-  console.log("HERE");
   return api.get(`/topics`);
 };
