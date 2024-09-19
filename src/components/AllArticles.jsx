@@ -13,6 +13,7 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
   const [order, setOrderAll] = useState("DESC");
 
   useEffect(() => {
+    setIsLoading(true);
     const params = {
       sort_by: sortBy,
       order: order,
@@ -46,6 +47,8 @@ function AllArticles({ selectedTopic, setSelectedTopic }) {
         setSelectedTopic={setSelectedTopic}
         setSortByAll={setSortByAll}
         setOrderAll={setOrderAll}
+        sortByAll={sortBy}
+        orderAll={order}
       />
       <div className="articles-container">
         {articles.map((article) => (

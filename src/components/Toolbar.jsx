@@ -11,6 +11,10 @@ export const Toolbar = ({
   setOrderAll,
   setSortByTopic,
   setOrderTopic,
+  sortByAll,
+  orderAll,
+  sortByTopic,
+  orderTopic,
 }) => {
   const [topics, setTopics] = useState();
   const [topicsLoading, setTopicsLoading] = useState(true);
@@ -67,6 +71,7 @@ export const Toolbar = ({
             name="queries"
             onChange={handleSortBy}
             className="topic-select"
+            value={selectedTopic === "all" ? sortByAll : sortByTopic}
           >
             <option value="created_at">date</option>
             <option value="comment_count">comment count</option>
@@ -75,7 +80,12 @@ export const Toolbar = ({
         </div>
         <div className="query-select-container">
           <p className="topic-label">Order</p>
-          <select name="order" onChange={handleOrder} className="topic-select">
+          <select
+            name="order"
+            onChange={handleOrder}
+            className="topic-select"
+            value={selectedTopic === "all" ? orderAll : orderTopic}
+          >
             <option value="DESC">descending</option>
             <option value="ASC">ascending</option>
           </select>

@@ -15,6 +15,7 @@ export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
   const { topic } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     const params = {
       sort_by: sortBy,
       order: order,
@@ -48,6 +49,8 @@ export const TopicArticles = ({ selectedTopic, setSelectedTopic }) => {
         setSelectedTopic={setSelectedTopic}
         setSortByTopic={setSortByTopic}
         setOrderTopic={setOrderTopic}
+        sortByTopic={sortBy}
+        orderTopic={order}
       />
       <div className="articles-container">
         {articles.map((article) => {
