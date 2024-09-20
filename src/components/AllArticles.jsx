@@ -85,17 +85,21 @@ function AllArticles() {
   });
   topicValidation.push(undefined);
   const checkValidTopic = topicValidation.includes(topic);
+
+  const hasError = !checkValidTopic || isApiError || paramError;
   return (
     <section className="page-content">
-      <Toolbar
-        selectedTopic={selectedTopic}
-        sortByAll={sortBy}
-        orderAll={order}
-        topics={topics}
-        setTopics={setTopics}
-      />
+      {!hasError && (
+        <Toolbar
+          selectedTopic={selectedTopic}
+          sortByAll={sortBy}
+          orderAll={order}
+          topics={topics}
+          setTopics={setTopics}
+        />
+      )}
       <div className="articles-container">
-        {!checkValidTopic || isApiError || paramError ? (
+        {hasError ? (
           <div className="indiv-container">
             <Lottie animationData={cogError} loop={true} className="error" />
             <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
@@ -108,7 +112,7 @@ function AllArticles() {
               </h2>
             )}
             {paramError && (
-              <h2 className="sub-error-text">Parameter Keys Incorrect</h2>
+              <h2 className="sub-error-text">Parameter Key Incorrect</h2>
             )}
           </div>
         ) : selectedTopic === "all" ? (
