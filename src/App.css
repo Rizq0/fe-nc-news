@@ -16,11 +16,16 @@ header {
   border: 1px solid black;
   width: 100%;
   margin: 0 0 1rem 0;
+  align-self: center;
+  max-width: 1920px;
 }
 
 footer {
   border: 1px solid black;
   margin: 1rem 0 0 0;
+  width: 100%;
+  align-self: center;
+  max-width: 1920px;
 }
 
 .loading {
@@ -70,7 +75,7 @@ footer {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 65%;
+  max-width: 1650px;
   min-width: 300px;
   gap: 1rem;
   margin: 0;
@@ -283,10 +288,10 @@ footer {
   border: 0.1rem solid black;
   flex: 1;
   align-items: center;
-  max-width: 65%;
+  max-width: 1250px;
   min-width: 300px;
   margin: 0 0 1rem 0;
-  width: 1180px;
+  width: 33.3%;
   padding: 0.5rem;
 }
 
