@@ -11,9 +11,7 @@ import { useSearchParams } from "react-router-dom";
 function AllArticles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortByError, setSortByError] = useState(false);
   const [sortBy, setSortByAll] = useState("created_at");
-  const [orderError, setOrderError] = useState(false);
   const [order, setOrderAll] = useState("DESC");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [topics, setTopics] = useState([]);
