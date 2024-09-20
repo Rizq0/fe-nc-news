@@ -21,11 +21,67 @@ header {
 }
 
 footer {
+  display: flex;
+  flex-direction: row;
   border: 1px solid black;
   margin: 1rem 0 0 0;
   width: 100%;
   align-self: center;
   max-width: 1920px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-designedby {
+  text-align: center;
+  font-weight: 400;
+  font-size: large;
+}
+
+.footer-addtext {
+  text-align: center;
+  font-size: medium;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  margin: 0 2rem;
+}
+
+.footer-single-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.3rem 1rem 0.3rem 1rem;
+}
+
+.icons {
+  max-height: 2rem;
+}
+
+.icon-text {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0.2rem 0;
+  max-width: max-content;
+}
+
+.anchor-flex {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+}
+
+.anchor-flex:hover {
+  filter: contrast(0);
+  transition: 0.3s;
 }
 
 .loading {
