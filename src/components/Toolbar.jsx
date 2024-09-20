@@ -5,8 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { getAllTopics } from "../api-calls/api-calls";
 import { useSearchParams, createSearchParams } from "react-router-dom";
 
-export const Toolbar = ({ selectedTopic, sortByAll, orderAll }) => {
-  const [topics, setTopics] = useState();
+export const Toolbar = ({
+  selectedTopic,
+  sortByAll,
+  orderAll,
+  topics,
+  setTopics,
+}) => {
   const [topicsLoading, setTopicsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
 

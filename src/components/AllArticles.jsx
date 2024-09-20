@@ -3,6 +3,7 @@ import { getAllArticles } from "../api-calls/api-calls";
 import { ArticleCard } from "./AllArticles-components/ArticleCard";
 import Lottie from "lottie-react";
 import cogLoading from "../assets/loading.json";
+import cogError from "../assets/error.json";
 import { Toolbar } from "./Toolbar";
 import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
@@ -13,6 +14,7 @@ function AllArticles() {
   const [sortBy, setSortByAll] = useState("created_at");
   const [order, setOrderAll] = useState("DESC");
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [topics, setTopics] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { topic } = useParams();
@@ -59,24 +61,38 @@ function AllArticles() {
       </div>
     );
   }
-
+  const topicValidation = topics.map((topic) => {
+    return topic.slug;
+  });
+  topicValidation.push(undefined);
+  const checkValidTopic = topicValidation.includes(topic);
   return (
     <section className="page-content">
       <Toolbar
         selectedTopic={selectedTopic}
         sortByAll={sortBy}
         orderAll={order}
+        topics={topics}
+        setTopics={setTopics}
       />
       <div className="articles-container">
-        {selectedTopic === "all"
-          ? articles.map((article) => (
+        {!checkValidTopic ? (
+          <div className="indiv-container">
+            <Lottie animationData={cogError} loop={true} className="error" />
+            <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
+            <h2>Topic Does Not Exist</h2>
+          </div>
+        ) : selectedTopic === "all" ? (
+          articles.map((article) => (
+            <ArticleCard article={article} key={article.title} />
+          ))
+        ) : (
+          articles.map((article) => {
+            return topic === article.topic ? (
               <ArticleCard article={article} key={article.title} />
-            ))
-          : articles.map((article) => {
-              return topic === article.topic ? (
-                <ArticleCard article={article} key={article.title} />
-              ) : null;
-            })}
+            ) : null;
+          })
+        )}
       </div>
     </section>
   );
