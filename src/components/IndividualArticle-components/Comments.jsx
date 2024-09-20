@@ -71,7 +71,7 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
   useEffect(() => {
     getCommentsById(articleid)
       .then(({ data: { comments } }) => {
-        setCommentsById(comments);
+        setCommentsById(comments.toSorted().reverse());
       })
       .catch((err) => {
         setIsLoading(false);
