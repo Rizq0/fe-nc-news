@@ -13,13 +13,17 @@ export const IndividualArticle = () => {
   return (
     <div>
       {isIdError ? (
-        <div className="indiv-container">
-          <Lottie animationData={cogError} loop={true} className="error" />
-          <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
-          <h2>
-            {errorMsg.status} {errorMsg.response.data.msg}
-          </h2>
-        </div>
+        <section className="page-content">
+          <div className="articles-container">
+            <div className="indiv-container">
+              <Lottie animationData={cogError} loop={true} className="error" />
+              <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
+              <h2>
+                {errorMsg.status} {errorMsg.response.data.msg}
+              </h2>
+            </div>
+          </div>
+        </section>
       ) : (
         <div className="indiv-container">
           <Article
