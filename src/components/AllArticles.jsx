@@ -16,6 +16,9 @@ function AllArticles() {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [topics, setTopics] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isApiError, setIsApiError] = useState(false);
+  const [apiErrorMessage, setApiErrorMessage] = useState();
+  const [paramError, setParamError] = useState(false);
 
   const { topic } = useParams();
   useEffect(() => {
@@ -28,6 +31,19 @@ function AllArticles() {
 
   useEffect(() => {
     setIsLoading(true);
+    setParamError(false);
+
+    const allowedKeys = ["sort_by", "order"];
+    const paramKeys = Array.from(searchParams.keys());
+    const notAllowedKeys = paramKeys.filter((param) => {
+      return !allowedKeys.includes(param);
+    });
+
+    if (notAllowedKeys.length > 0) {
+      setIsLoading(false);
+      setParamError(true);
+      return;
+    }
     const sortByQuery = searchParams.get("sort_by");
     if (sortByQuery) {
       setSortByAll(sortByQuery);
@@ -43,10 +59,13 @@ function AllArticles() {
     getAllArticles({ params })
       .then(({ data }) => {
         setIsLoading(false);
+        setIsApiError(false);
         setArticles(data.articles);
       })
       .catch((err) => {
         setIsLoading(false);
+        setIsApiError(true);
+        setApiErrorMessage(err);
         console.log(err);
       })
       .finally(() => {
@@ -76,11 +95,21 @@ function AllArticles() {
         setTopics={setTopics}
       />
       <div className="articles-container">
-        {!checkValidTopic ? (
+        {!checkValidTopic || isApiError || paramError ? (
           <div className="indiv-container">
             <Lottie animationData={cogError} loop={true} className="error" />
             <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
-            <h2>Topic Does Not Exist</h2>
+            {!checkValidTopic && (
+              <h2 className="sub-error-text">Topic Does Not Exist</h2>
+            )}
+            {isApiError && (
+              <h2 className="sub-error-text">
+                {apiErrorMessage.status} {apiErrorMessage.response.data.msg}
+              </h2>
+            )}
+            {paramError && (
+              <h2 className="sub-error-text">Parameter Keys Incorrect</h2>
+            )}
           </div>
         ) : selectedTopic === "all" ? (
           articles.map((article) => (
