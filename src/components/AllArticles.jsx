@@ -11,11 +11,15 @@ import { useSearchParams } from "react-router-dom";
 function AllArticles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortByError, setSortByError] = useState(false);
   const [sortBy, setSortByAll] = useState("created_at");
+  const [orderError, setOrderError] = useState(false);
   const [order, setOrderAll] = useState("DESC");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [topics, setTopics] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isApiError, setIsApiError] = useState(false);
+  const [apiErrorMessage, setApiErrorMessage] = useState();
 
   const { topic } = useParams();
   useEffect(() => {
@@ -43,10 +47,13 @@ function AllArticles() {
     getAllArticles({ params })
       .then(({ data }) => {
         setIsLoading(false);
+        setIsApiError(false);
         setArticles(data.articles);
       })
       .catch((err) => {
         setIsLoading(false);
+        setIsApiError(true);
+        setApiErrorMessage(err);
         console.log(err);
       })
       .finally(() => {
@@ -76,11 +83,18 @@ function AllArticles() {
         setTopics={setTopics}
       />
       <div className="articles-container">
-        {!checkValidTopic ? (
+        {!checkValidTopic || isApiError ? (
           <div className="indiv-container">
             <Lottie animationData={cogError} loop={true} className="error" />
             <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
-            <h2>Topic Does Not Exist</h2>
+            {!checkValidTopic && (
+              <h2 className="sub-error-text">Topic Does Not Exist</h2>
+            )}
+            {isApiError && (
+              <h2 className="sub-error-text">
+                {apiErrorMessage.status} {apiErrorMessage.response.data.msg}
+              </h2>
+            )}
           </div>
         ) : selectedTopic === "all" ? (
           articles.map((article) => (

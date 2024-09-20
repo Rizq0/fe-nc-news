@@ -11,7 +11,7 @@ import { UserContext } from "../../contexts/UserContext";
 import bin from "../../assets/bin.png";
 
 export const Comments = ({ articleid, commentCount, setCommentCount }) => {
-  const [commentsById, setCommentsById] = useState();
+  const [commentsById, setCommentsById] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [commentIsLoading, setCommentIsLoading] = useState(false);
   const [commentError, setCommentError] = useState(false);

@@ -6,7 +6,7 @@ export const PathError = () => {
     <div className="indiv-container">
       <Lottie animationData={cogError} loop={true} className="error" />
       <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
-      <h2>Bad Path</h2>
+      <h2 className="sub-error-text">Bad Path</h2>
     </div>
   );
 };

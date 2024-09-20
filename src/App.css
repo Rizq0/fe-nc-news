@@ -327,6 +327,7 @@ footer {
   width: 65%;
 }
 
-.error-text {
+.error-text,
+.sub-error-text {
   text-align: center;
 }
