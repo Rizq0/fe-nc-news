@@ -71,7 +71,7 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
   useEffect(() => {
     getCommentsById(articleid)
       .then(({ data: { comments } }) => {
-        setCommentsById(comments);
+        setCommentsById(comments.toSorted().reverse());
       })
       .catch((err) => {
         setIsLoading(false);
@@ -128,6 +128,9 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
         <h2 className="no-comments">No Comments Available</h2>
       ) : null}
       {commentsById.map((comment) => {
+        const dateComment = comment.created_at;
+        const dateObject = new Date(dateComment);
+        const fullDate = dateObject.toLocaleDateString();
         return (
           <div key={comment.comment_id} className="comment-item">
             <p>{comment.body}</p>
@@ -159,6 +162,7 @@ export const Comments = ({ articleid, commentCount, setCommentCount }) => {
                 </>
               )}
             </div>
+            <p>Created: {fullDate} </p>
           </div>
         );
       })}
