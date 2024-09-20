@@ -18,6 +18,7 @@ function AllArticles() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isApiError, setIsApiError] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState();
+  const [paramError, setParamError] = useState(false);
 
   const { topic } = useParams();
   useEffect(() => {
@@ -30,6 +31,19 @@ function AllArticles() {
 
   useEffect(() => {
     setIsLoading(true);
+    setParamError(false);
+
+    const allowedKeys = ["sort_by", "order"];
+    const paramKeys = Array.from(searchParams.keys());
+    const notAllowedKeys = paramKeys.filter((param) => {
+      return !allowedKeys.includes(param);
+    });
+
+    if (notAllowedKeys.length > 0) {
+      setIsLoading(false);
+      setParamError(true);
+      return;
+    }
     const sortByQuery = searchParams.get("sort_by");
     if (sortByQuery) {
       setSortByAll(sortByQuery);
@@ -81,7 +95,7 @@ function AllArticles() {
         setTopics={setTopics}
       />
       <div className="articles-container">
-        {!checkValidTopic || isApiError ? (
+        {!checkValidTopic || isApiError || paramError ? (
           <div className="indiv-container">
             <Lottie animationData={cogError} loop={true} className="error" />
             <h1 className="error-text">THERE HAS BEEN AN ERROR</h1>
@@ -92,6 +106,9 @@ function AllArticles() {
               <h2 className="sub-error-text">
                 {apiErrorMessage.status} {apiErrorMessage.response.data.msg}
               </h2>
+            )}
+            {paramError && (
+              <h2 className="sub-error-text">Parameter Keys Incorrect</h2>
             )}
           </div>
         ) : selectedTopic === "all" ? (
