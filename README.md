@@ -4,7 +4,7 @@
 
 This project is a dynamic frontend designed to provide users with an engaging and intuitive interface for the [nc-news-backend-api (click me)](https://github.com/Rizq0/be-nc-news). With a focus on usability and performance, this project aims to create a smooth user experience.
 
-Functionality has been prioritized during development, ensuring that all core features work effectively. Styling and aesthetics are planned to be added in subsequent versions to further improve the user experience.
+Functionality has been prioritised during development, ensuring that all core features work effectively. Styling and aesthetics are planned to be added in subsequent versions to further improve the user experience.
 
 Skills used while completing this project have been listed at the bottom of this README.
 
