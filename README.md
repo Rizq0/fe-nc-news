@@ -105,6 +105,7 @@ This portfolio project was created as part of a Digital Skills Bootcamp in Softw
     - Routing: Utilised React Router for dynamic navigation and URL management.
     - Context API: Reduced the need for prop drilling by creating context.
     - Dynamic Rendering: Implemented to conditionally display components based on application state or props.
+    - Optimistic / Pessimistic Rendering: Parts of a component UI are either optimistically or pessimistically rendered depending on user input.
 
   - Axios
 
