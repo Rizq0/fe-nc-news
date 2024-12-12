@@ -2,7 +2,7 @@
 
 </div>
 <br/>
-<img src="plan/fe-example.mp4" title="Main Demo">
+<img src="plan/wanadQ7.gif" title="Main Demo">
 </a>
 <br/>
 
