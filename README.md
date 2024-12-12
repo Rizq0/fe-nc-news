@@ -1,5 +1,11 @@
 # Northcoders News Frontend
 
+</div>
+<br/>
+<img src="plan/fe-example.mp4" title="Main Demo">
+</a>
+<br/>
+
 ## Project Summary
 
 This project is a dynamic frontend designed to provide users with an engaging and intuitive interface for the [nc-news-backend-api (click me)](https://github.com/Rizq0/be-nc-news). With a focus on usability and performance, this project aims to create a smooth user experience.
